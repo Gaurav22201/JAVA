@@ -1,0 +1,51 @@
+Alice is the teacher of a class having N students, where each student is having some personality value, given in the form of an array A. Here denotes the personality value of student, where . Alice has special integer K with her. Student i is a friend of Student j, if and only if (
+
+). Each student's strength is equal to the number of friends he/she has. Alice needs to calculate the sum of the strength of all the students in the class. Help Alice for the same.
+
+Note: This is a Code golf problem. You need to write code with minimum number of characters.
+
+Input:
+First line contains 2 integers N, K, denoting the number of students in the class and the special integer Alice is having respectively.
+Second line contains N space separated integers, denoting the personality value of each student.
+
+Output:
+Print the sum of the strength of all the students in the class.
+
+Here, 6,11,16 are friends of each other as all will result in 1 when modulo with 5. Here each student is having strength 2. Similarly 7,12 are friends of each other, as all will result in 2 when modulo with 5. Here each student is having strength 1.
+
+Total Strength of class is 
+
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	    int[] ipt1 = Arrays.stream(reader.readLine().split("\\s")).mapToInt(Integer::parseInt).toArray();
+        int[] ipt2 = Arrays.stream(reader.readLine().split("\\s")).mapToInt(Integer::parseInt).toArray();
+        List<Integer> l1 = new ArrayList<>();
+	    for(int i:ipt2){
+            l1.add(i);
+        }
+        int mod = ipt1[1];
+	    for(int i=0;i<l1.size();i++){
+	        int modulo = l1.get(i)%mod;
+	        l1.set(i,modulo);
+	    }
+
+	    int sum = 0;
+	    HashSet<Integer> hset = new HashSet<>(l1);
+	    for(int i:hset){
+	        int x = Collections.frequency(l1,i);
+	        sum = sum+(x*(--x));
+	    }
+	    System.out.print(sum);
+        
+
+    }
+}
