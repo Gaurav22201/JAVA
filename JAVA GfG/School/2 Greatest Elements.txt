@@ -1,0 +1,13 @@
+ Your task is to complete the function findElements() which takes the array A[] and 
+its size N as inputs and return the vector sorted values denoting the elements in array 
+which have at-least two greater elements than themselves.
+
+public long[] findElements( long a[], long n)
+    {
+        Arrays.sort(a);
+        long []arr2 = new long[(int)n-2];
+        for(int i=0;i<n-2;i++){
+            arr2[i] = a[i];
+        } 
+        return arr2;
+    }

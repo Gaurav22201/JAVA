@@ -1,0 +1,14 @@
+public int find_median(int[] v)
+    {
+        int median;
+        int n = v.length;
+        Arrays.sort(v);
+        if(n==2){
+            median = (v[0]+v[1])/2;
+        }else if(n%2==0){
+            median = (v[n/2]+v[(n/2)-1])/2;
+        }else{
+            median = v[n/2];
+        }
+        return median;
+    }
