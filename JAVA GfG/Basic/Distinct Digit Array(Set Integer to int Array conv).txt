@@ -1,0 +1,61 @@
+Given an array nums of positive integers of size N. Find all distinct digits present in nums.
+ 
+
+Example 1:
+
+Input: nums = [131, 11, 48]
+Output: 1 3 4 8
+Explanation: 1, 3, 4, and 8 are only distinct
+digits that can be extracted from the numbers
+of the array.
+
+// { Driver Code Starts
+//Initial Template for Java
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+{
+    public static void main(String[] args) throws IOException
+    {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while(T-->0)
+        {
+            int n = sc.nextInt();
+            int[] nums = new int[n];
+            for(int i = 0; i < n; i++)
+                nums[i] = sc.nextInt();
+            Solution ob = new Solution();
+            int[] ans = ob.common_digits(nums);
+            for(int i = 0; i < ans.length; i++)
+                System.out.print(ans[i] + " ");
+            System.out.println();
+        }
+    }
+}
+// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution
+{
+    public int[] common_digits(int[] nums)
+    {
+        TreeSet<Integer> nset = new TreeSet<>();
+        for(int i=0;i<nums.length;i++){
+            while(nums[i]>0){
+                int temp = nums[i]%10;
+                nset.add(temp);
+                nums[i] = nums[i]/10;
+            }
+        }
+        // Integer []arr = new Integer[nset.size()];
+        // arr = nset.toArray(arr);
+        return nset.stream()
+            .mapToInt(Integer::intValue)
+            .toArray();
+    }
+}
