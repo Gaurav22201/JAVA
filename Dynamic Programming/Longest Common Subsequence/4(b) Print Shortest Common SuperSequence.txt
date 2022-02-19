@@ -1,0 +1,81 @@
+public class Main
+{
+
+/* Returns length of LCS for X[0..m-1], Y[0..n-1] */
+static void lcs( char[] X, char[] Y, int m, int n )
+{
+	int T[][] = new int[m+1][n+1];
+
+	/* Following steps build L[m+1][n+1] in bottom up fashion. Note
+		that L[i][j] contains length of LCS of X[0..i-1] and Y[0..j-1] */
+	for (int i=0; i<=m; i++)
+	{
+	for (int j=0; j<=n; j++)
+	{
+		if (i == 0 || j == 0)
+			T[i][j] = 0;
+		else if (X[i-1] == Y[j-1])
+			T[i][j] = T[i-1][j-1] + 1;
+		else
+			T[i][j] = Math.max(T[i-1][j], T[i][j-1]);
+	}
+	}
+    int i=m,j=n;
+    String s = "";
+    while(i>0 && j>0){
+        if(X[i-1]==Y[j-1]){
+            s = s+X[i-1];
+            i--;
+            j--;
+        }else{
+            if(T[i][j-1]>T[i-1][j]){
+                s = s+Y[j-1];
+                j--;
+            }else{
+                s = s+X[i-1];
+                i--;
+            }
+        }
+    }
+    while (i > 0)
+        {
+            s += (X[i - 1]);
+            i--;
+        }
+ 
+        // If X reaches its end, put remaining characters
+        // of Y in the result string
+        while (j > 0)
+        {
+            s += (Y[j - 1]);
+            j--;
+        }
+
+//Reversing the String to get desired O/P
+
+    String nstr="";
+    for (int k=0; k<s.length(); k++)
+      {
+        char ch= s.charAt(k); 
+        nstr= ch+nstr;
+      }
+    System.out.print(nstr);
+}
+
+
+public static void main(String[] args)
+{
+	
+	String s1 = "acbcf";
+	String s2 = "abcdaf";
+
+	char[] X=s1.toCharArray();
+	char[] Y=s2.toCharArray();
+	int m = X.length;
+	int n = Y.length;
+
+	lcs( X, Y, m, n );
+}
+
+}
+

@@ -1,0 +1,65 @@
+Given two strings ‘X’ and ‘Y’, find the length of the longest common substring. 
+
+Examples : 
+
+    Input : X = “GeeksforGeeks”, y = “GeeksQuiz” 
+    Output : 5 
+    Explanation:
+    The longest common substring is “Geeks” and is of length 5.
+
+    Input : X = “abcdxyz”, y = “xyzabcd” 
+    Output : 4 
+    Explanation:
+    The longest common substring is “abcd” and is of length 4.
+
+    Input : X = “zxabcdezy”, y = “yzabcdezx” 
+    Output : 6 
+    Explanation:
+    The longest common substring is “abcdez” and is of length 6.
+
+
+public class Main
+{
+
+	// Function to find the length of the
+	// longest LCS
+	static int LCSubStr(String s,String t,int n,int m)
+	{
+	
+		// Create DP table
+		int dp[][]=new int[n+1][m+1];
+		int res=0;
+	
+		for(int i=0;i<=n;i++)
+		{
+			for(int j=0;j<=m;j++)
+			{
+			    if(i==0 || j==0){
+			        dp[i][j]=0;
+			    }
+				else if(s.charAt(i-1)==t.charAt(j-1))
+				{
+					dp[i][j]=dp[i-1][j-1]+1;
+					if(dp[i][j]>res)
+						res=dp[i][j];
+				}
+				else dp[i][j]=0;
+			}
+		}
+		return res;
+	}
+
+	// Driver Code
+	public static void main (String[] args)
+	{
+		String X="abcde";
+		String Y="abfce";
+		
+		int m=X.length();
+		int n=Y.length();
+		
+		// Function call
+		System.out.println(LCSubStr(X,Y,m,n));
+		
+	}
+}

@@ -1,0 +1,59 @@
+Given two strings str1 and str2, the task is to find the length of the shortest string that has both str1 and str2 
+as subsequences.
+
+Examples : 
+
+Input:   str1 = "geek",  str2 = "eke"
+Output: 5
+Explanation: 
+String "geeke" has both string "geek" 
+and "eke" as subsequences.
+
+Input:   str1 = "AGGTAB",  str2 = "GXTXAYB"
+Output:  9
+Explanation: 
+String "AGXGTXAYB" has both string 
+"AGGTAB" and "GXTXAYB" as subsequences.
+
+public class Main
+{
+
+/* Returns length of LCS for X[0..m-1], Y[0..n-1] */
+static void lcs( char[] X, char[] Y, int m, int n )
+{
+	int T[][] = new int[m+1][n+1];
+
+	/* Following steps build L[m+1][n+1] in bottom up fashion. Note
+		that L[i][j] contains length of LCS of X[0..i-1] and Y[0..j-1] */
+	for (int i=0; i<=m; i++)
+	{
+	for (int j=0; j<=n; j++)
+	{
+		if (i == 0 || j == 0)
+			T[i][j] = 0;
+		else if (X[i-1] == Y[j-1])
+			T[i][j] = T[i-1][j-1]+1;
+		else
+			T[i][j] = Math.max(T[i-1][j], T[i][j-1]);
+	}
+	}
+    System.out.print((m+n)-T[m][n]); // Worst Case(Dono string ki length + ho jaaye)-Commom SubSeq length
+}
+
+
+public static void main(String[] args)
+{
+	
+	String s1 = "geek";
+	String s2 = "eke";
+
+	char[] X=s1.toCharArray();
+	char[] Y=s2.toCharArray();
+	int m = X.length;
+	int n = Y.length;
+
+	lcs( X, Y, m, n );
+}
+
+}
+

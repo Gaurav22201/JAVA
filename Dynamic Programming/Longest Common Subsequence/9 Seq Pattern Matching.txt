@@ -1,0 +1,48 @@
+If any string is a subSequence of the other return True else Return False.
+
+public class Main
+{
+
+/* Returns length of LCS for X[0..m-1], Y[0..n-1] */
+static void lcs( char[] X, char[] Y, int m, int n )
+{
+	int T[][] = new int[m+1][n+1];
+
+	/* Following steps build L[m+1][n+1] in bottom up fashion. Note
+		that L[i][j] contains length of LCS of X[0..i-1] and Y[0..j-1] */
+	for (int i=0; i<=m; i++)
+	{
+	for (int j=0; j<=n; j++)
+	{
+		if (i == 0 || j == 0)
+			T[i][j] = 0;
+		else if (X[i-1] == Y[j-1])
+			T[i][j] = T[i-1][j-1] + 1;
+		else
+			T[i][j] = Math.max(T[i-1][j], T[i][j-1]);
+	}
+	}
+    if(T[m][n]==m || T[m][n]==n){
+        System.out.print("True");
+    }else{
+        System.out.print("False");
+    }
+}
+
+
+public static void main(String[] args)
+{
+	
+	String s1 = "AXY";
+	String s2 = "ADXCPY";
+
+	char[] X=s1.toCharArray();
+	char[] Y=s2.toCharArray();
+	int m = X.length;
+	int n = Y.length;
+
+	lcs( X, Y, m, n );
+}
+
+}
+
