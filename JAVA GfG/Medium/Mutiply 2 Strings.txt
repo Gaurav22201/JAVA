@@ -1,0 +1,54 @@
+Given two numbers as strings s1 and s2. Calculate their Product.
+Note: The numbers can be negative.
+
+
+Example 1:
+
+Input:
+s1 = "33"
+s2 = "2"
+Output:
+66
+
+Example 2:
+
+Input:
+s1 = "11"
+s2 = "23"
+Output:
+253
+
+// { Driver Code Starts
+//Initial Template for Java
+
+
+import java.util.*;
+import java.math.*;
+
+class Multiply{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int t=sc.nextInt();
+        while(t-->0){
+            String a=sc.next();
+            String b=sc.next();
+            Solution g=new Solution();
+            System.out.println(g.multiplyStrings(a,b));
+        }
+    }
+}// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution
+{
+    public String multiplyStrings(String s1,String s2)
+    {
+         java.math.BigInteger num1 = new java.math.BigInteger(s1);
+        java.math.BigInteger num2 = new java.math.BigInteger(s2);
+        java.math.BigInteger multi = num1.multiply(num2);
+        String r = multi.toString();
+        return r;
+    }
+}
